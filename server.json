@@ -3,7 +3,7 @@
   "name": "io.github.pipeworx-io/luchtmeetnet",
   "title": "Luchtmeetnet",
   "description": "Luchtmeetnet MCP — official Netherlands air quality (RIVM Luchtmeetnet, api.luchtmeetnet.nl)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "websiteUrl": "https://pipeworx.io/packs/luchtmeetnet",
   "repository": {
     "url": "https://github.com/pipeworx-io/mcp-luchtmeetnet",
