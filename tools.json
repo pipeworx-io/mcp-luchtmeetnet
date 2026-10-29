@@ -1,0 +1,68 @@
+[
+  {
+    "name": "luchtmeetnet_stations",
+    "description": "List and search official Netherlands air quality measuring stations (RIVM Luchtmeetnet). Filter by place or station name (Amsterdam, Rotterdam, Utrecht, Den Haag...), or pass latitude/longitude to get the nearest stations with distance. Returns station number (e.g. \"NL49012\"), location, and coordinates — the station number feeds luchtmeetnet_measurements and luchtmeetnet_air_quality_index. Example: luchtmeetnet_stations({ search: \"Amsterdam\" })",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "Text filter on station location, e.g. \"Amsterdam\", \"Rotterdam\", \"Utrecht\", \"Van Diemenstraat\""
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Latitude — together with longitude, returns stations sorted by distance (nearest first)"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude — together with latitude, returns stations sorted by distance (nearest first)"
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max stations to return, 1-102 (default 10)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "luchtmeetnet_measurements",
+    "description": "Get recent air pollution measurements from a Netherlands (RIVM Luchtmeetnet) measuring station: NO2, PM10, PM2.5 (PM25), ozone (O3), SO2, CO and more, hourly values in µg/m³. Station can be an NL number (\"NL49012\") or a Dutch place name (\"Amsterdam\", \"Rotterdam\") — the first matching station is used. Example: luchtmeetnet_measurements({ station: \"Amsterdam\", pollutant: \"NO2\", hours: 6 })",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "station": {
+          "type": "string",
+          "description": "Station number like \"NL49012\", or a place/station name like \"Amsterdam\" or \"Rotterdam-Pleinweg\""
+        },
+        "pollutant": {
+          "type": "string",
+          "description": "Pollutant formula: NO2, PM10, PM25 (PM2.5), O3, NO, SO2, CO, NH3, C6H6... Omit for all pollutants the station measures"
+        },
+        "hours": {
+          "type": "number",
+          "description": "How many hours back to fetch, 1-168 (default 6). Data updates hourly"
+        }
+      },
+      "required": [
+        "station"
+      ]
+    }
+  },
+  {
+    "name": "luchtmeetnet_air_quality_index",
+    "description": "Get the official Dutch air quality index (LKI, Luchtkwaliteitsindex) for a Netherlands station or place — a 1-11 scale computed by RIVM from PM10, ozone and NO2: 1-3 good (goed), 4-6 moderate (matig), 7-8 poor (onvoldoende), 9-10 bad (slecht), 11 very bad (zeer slecht). Answers \"how is the air quality in Amsterdam right now\". Example: luchtmeetnet_air_quality_index({ station: \"Rotterdam\" })",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "station": {
+          "type": "string",
+          "description": "Station number like \"NL49012\", or a place name like \"Amsterdam\", \"Rotterdam\", \"Utrecht\""
+        }
+      },
+      "required": [
+        "station"
+      ]
+    }
+  }
+]
